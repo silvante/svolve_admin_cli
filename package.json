@@ -1,0 +1,16 @@
+{
+  "name": "clisa",
+  "version": "1.0.0",
+  "description": "cli tool to managa svolve.uz",
+  "keywords": [
+    "cli",
+    "svolve"
+  ],
+  "license": "ISC",
+  "author": "Mardonbek Khamidov",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
