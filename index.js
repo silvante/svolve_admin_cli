@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
-import chalk from "chalk";
+import { green, white } from "./text_themes/themes.js";
 
-console.log(chalk.bgGreen(chalk.black("hi there!")));
+console.log(green("hi there! :)"));
+console.log(white("hi there! :)"));
