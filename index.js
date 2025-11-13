@@ -1,6 +1,10 @@
 #!/usr/bin/env node
+import figlet from "figlet";
 
 import { green, white } from "./text_themes/themes.js";
+import gradient from "gradient-string";
 
-console.log(green("hi there! :)"));
-console.log(white("hi there! :)"));
+console.log(green("🍋 Welcome to clisa v1, enjoy using it!"));
+figlet("Clisa v1.", (err, data) => {
+  console.log(gradient.pastel.multiline(data));
+});
