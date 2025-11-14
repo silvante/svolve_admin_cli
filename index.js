@@ -1,10 +1,28 @@
 #!/usr/bin/env node
-import figlet from "figlet";
+import path from "path";
+import fs from "fs";
+import { red } from "./text_themes/themes.js";
+import ora from "ora";
 
-import { green } from "./text_themes/themes.js";
-import gradient from "gradient-string";
+const commands_dir = path.resolve("./commands");
 
-console.log(green("🍋 Welcome to clisa v1, enjoy using it!"));
-figlet("Clisa v1.", (err, data) => {
-  console.log(gradient.pastel.multiline(data));
-});
+function run_command(command_name) {
+  const file_path = path.join(commands_dir, `${command_name}.js`);
+
+  if (!fs.existsSync(file_path)) {
+    console.log(`Unknown command: ${red(command_name)}`);
+    return;
+  }
+
+  import(file_path).then((cmd) => {
+    const loader = ora("loading your command...").start();
+    cmd
+      .default()
+      .then(() => {
+        loader.succeed(`command $${command_name} succeeded :)`);
+      })
+      .catch((err) => {
+        loader.fail(`command failed: ${err.message}`);
+      });
+  });
+}

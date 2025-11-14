@@ -9,3 +9,7 @@ export function white(text) {
   const dark_text = chalk.black(text);
   return chalk.bgWhite(dark_text);
 }
+
+export function red(text) {
+  return chalk.bgRed(text);
+}
