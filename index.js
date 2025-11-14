@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import figlet from "figlet";
 
-import { green, white } from "./text_themes/themes.js";
+import { green } from "./text_themes/themes.js";
 import gradient from "gradient-string";
 
 console.log(green("🍋 Welcome to clisa v1, enjoy using it!"));
