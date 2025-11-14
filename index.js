@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import path from "path";
 import fs from "fs";
-import { red } from "./text_themes/themes.js";
+import { green, red } from "./text_themes/themes.js";
 import ora from "ora";
+import figlet from "figlet";
 
 const commands_dir = path.resolve("./commands");
 
@@ -24,5 +25,15 @@ function run_command(command_name) {
       .catch((err) => {
         loader.fail(`command failed: ${err.message}`);
       });
+  });
+}
+
+function startShell() {
+  console.clear();
+
+  console.log(`🚀 welcome to clisa ${green("v1 cli")}, enjoy using it.`);
+  
+  figlet("Clisa v1", (err, data) => {
+    console.log();
   });
 }
