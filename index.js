@@ -3,10 +3,9 @@ import path from "path";
 import fs from "fs";
 import { green, red } from "./text_themes/themes.js";
 import ora from "ora";
-import figlet from "figlet";
-import gradient from "gradient-string";
 import readline from "readline";
 import chalk from "chalk";
+import { wellcome } from "./defaults.js";
 
 const commands_dir = path.resolve("./commands");
 
@@ -35,12 +34,7 @@ async function startShell() {
   console.clear();
 
   // wellcome screen
-  console.log(`🍋 welcome to clisa ${green("v1 cli")}, enjoy using it.`);
-  console.log("");
-  await figlet("Clisa v1", (err, data) => {
-    console.log(gradient.pastel.multiline(data));
-  });
-  console.log("");
+  await wellcome();
 
   const readl = readline.createInterface({
     input: process.stdin,
