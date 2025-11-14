@@ -4,6 +4,9 @@ import fs from "fs";
 import { green, red } from "./text_themes/themes.js";
 import ora from "ora";
 import figlet from "figlet";
+import gradient from "gradient-string";
+import readline from "readline";
+import chalk from "chalk";
 
 const commands_dir = path.resolve("./commands");
 
@@ -28,12 +31,28 @@ function run_command(command_name) {
   });
 }
 
-function startShell() {
+async function startShell() {
   console.clear();
 
-  console.log(`🚀 welcome to clisa ${green("v1 cli")}, enjoy using it.`);
-  
-  figlet("Clisa v1", (err, data) => {
-    console.log();
+  // wellcome screen
+  console.log(`🍋 welcome to clisa ${green("v1 cli")}, enjoy using it.`);
+  console.log("");
+  await figlet("Clisa v1", (err, data) => {
+    console.log(gradient.pastel.multiline(data));
   });
+  console.log("");
+
+  const readl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    prompt: chalk.magenta("enter command >"),
+  });
+
+  readl.prompt();
+}
+
+if (process.argv.length <= 2) {
+  startShell();
+} else {
+  console.log(`for now you can run only shell, please run ${green(clisa)} 🍋`);
 }
