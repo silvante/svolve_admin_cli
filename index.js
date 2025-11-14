@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from "path";
-import fs from "fs";
+import fs, { read } from "fs";
 import { command_line, green, red, white } from "./text_themes/themes.js";
 import ora from "ora";
 import readline from "readline";
@@ -9,7 +9,7 @@ import { wellcome } from "./defaults.js";
 
 const commands_dir = path.resolve("./commands");
 
-function run_command(command_name) {
+async function run_command(command_name) {
   const file_path = path.join(commands_dir, `${command_name}.js`);
 
   if (!fs.existsSync(file_path)) {
@@ -23,12 +23,15 @@ function run_command(command_name) {
 
   import(file_path).then((cmd) => {
     const loader = ora("processing your command...").start();
+    console.log("\n");
     cmd
       .default()
       .then(() => {
-        loader.succeed(`command $${command_name} succeeded :)`);
+        console.log("");
+        loader.succeed(`command ${white(command_name)} succeeded :)`);
       })
       .catch((err) => {
+        console.log("");
         loader.fail(`command failed: ${err.message}`);
       });
   });
@@ -67,7 +70,7 @@ async function startShell() {
       return;
     }
 
-    run_command(input);
+    await run_command(input);
     readl.prompt();
   });
 }
