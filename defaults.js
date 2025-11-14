@@ -1,18 +1,19 @@
 import figlet from "figlet";
 import gradient from "gradient-string";
-import { green, red, white } from "./text_themes/themes.js";
+import { multicolor, white } from "./text_themes/themes.js";
 
 export const base_url = "https://server.svolve.uz";
 export const request_timeout = 15000;
 
 export async function wellcome() {
-  console.log(`🍋 welcome to clisa ${green("v1 cli")}, enjoy using it.`);
+  console.log(`🍋 welcome to ${multicolor("clisa v1 cli")} for svolve admin.`);
   console.log("");
-  await figlet("Clisa v1", (err, data) => {
-    console.log(gradient.pastel.multiline(data));
-  });
+
+  const clisa_asci = await figlet.text("Clisa v1");
+  console.log(multicolor(clisa_asci));
+
   console.log("");
-  console.log(`> type ${white("quit")} to close clisa.`);
+  console.log(`> type ${white("exit")} to close clisa.`);
   console.log(`> type ${white("help")} to get some help and basic commands.`);
   console.log(`> type ${white("version")} to get current version of clisa.`);
   console.log("");

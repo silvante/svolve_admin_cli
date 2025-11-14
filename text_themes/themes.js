@@ -15,6 +15,10 @@ export function red(text) {
   return chalk.bgRed(text);
 }
 
+export function multicolor(text) {
+  return gradient.pastel.multiline(text);
+}
+
 export function command_line(text) {
   return gradient.atlas.multiline(text);
 }

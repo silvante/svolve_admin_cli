@@ -18,7 +18,7 @@ function run_command(command_name) {
   }
 
   import(file_path).then((cmd) => {
-    const loader = ora("loading your command...").start();
+    const loader = ora("processing your command...").start();
     cmd
       .default()
       .then(() => {
@@ -43,10 +43,23 @@ async function startShell() {
   });
 
   readl.prompt();
+
+  readl.on("line", async (line) => {
+    const input = line.trim();
+    if (!input) return readl.prompt();
+
+    if (input === "exit" || input === "quit") {
+      console.log("arrivederci 👋");
+      readl.close()
+      return
+    }
+  });
 }
 
 if (process.argv.length <= 2) {
   startShell();
 } else {
-  console.log(`for now you can run only shell, please run ${green(clisa)} 🍋`);
+  console.log(
+    `\n for now you can run only shell, please run ${green("clisa")} 🍋 \n`
+  );
 }
