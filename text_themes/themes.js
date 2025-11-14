@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import gradient from "gradient-string";
 
 export function green(text) {
   const dark_text = chalk.black(text);
@@ -12,4 +13,8 @@ export function white(text) {
 
 export function red(text) {
   return chalk.bgRed(text);
+}
+
+export function command_line(text) {
+  return gradient.atlas.multiline(text);
 }

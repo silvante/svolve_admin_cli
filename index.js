@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import path from "path";
 import fs from "fs";
-import { green, red } from "./text_themes/themes.js";
+import { command_line, green, red } from "./text_themes/themes.js";
 import ora from "ora";
 import readline from "readline";
 import chalk from "chalk";
@@ -39,7 +39,7 @@ async function startShell() {
   const readl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: chalk.magenta("enter command >"),
+    prompt: chalk.bold(`${command_line("clisa ⟡ svolve")} ❯❯ `),
   });
 
   readl.prompt();
