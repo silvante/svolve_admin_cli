@@ -14,7 +14,7 @@ export async function wellcome() {
 
   console.log("");
   console.log(`> type ${white("exit")} to close clisa.`);
-  console.log(`> type ${white("help")} to get some help and basic commands.`);
+  console.log(`> type ${white("help")} to get some help and available commands.`);
   console.log(`> type ${white("version")} to get current version of clisa.`);
   console.log("");
 }
