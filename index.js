@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import path from "path";
-import fs, { read } from "fs";
+import fs from "fs";
 import { command_line, green, red, white } from "./text_themes/themes.js";
-import ora from "ora";
 import readline from "readline";
 import chalk from "chalk";
 import { wellcome } from "./defaults.js";
@@ -22,20 +21,20 @@ async function run_command(command_name) {
     return;
   }
 
-  const spinner = nano_spinner
-    .createSpinner("processing your command...")
-    .start();
+  // const spinner = nano_spinner
+  //   .createSpinner("processing your command...")
+  //   .start();
 
-  console.log("\n");
+  console.log("");
 
   try {
     const cmd = await import(file_path);
     await cmd.default();
     console.log("");
-    spinner.success({ text: `command ${white(command_name)} succeeded :)` });
+    // spinner.success({ text: `command ${white(command_name)} succeeded :)` });
   } catch (error) {
     console.log("");
-    spinner.error({ text: `command failed: ${error.message}` });
+    // spinner.error({ text: `command failed: ${error.message}` });
   }
 }
 
