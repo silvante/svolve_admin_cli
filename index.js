@@ -21,7 +21,7 @@ async function run_command(command_name) {
     return;
   }
 
-  import(file_path).then((cmd) => {
+  await import(file_path).then((cmd) => {
     const loader = ora("processing your command...").start();
     console.log("\n");
     cmd
