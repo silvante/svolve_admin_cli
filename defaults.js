@@ -1,5 +1,4 @@
 import figlet from "figlet";
-import gradient from "gradient-string";
 import { multicolor, white } from "./text_themes/themes.js";
 
 export const base_url = "https://server.svolve.uz";
