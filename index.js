@@ -6,6 +6,7 @@ import ora from "ora";
 import readline from "readline";
 import chalk from "chalk";
 import { wellcome } from "./defaults.js";
+import nano_spinner from "nanospinner";
 
 const commands_dir = path.resolve("./commands");
 
@@ -21,20 +22,21 @@ async function run_command(command_name) {
     return;
   }
 
-  await import(file_path).then((cmd) => {
-    const loader = ora("processing your command...").start();
-    console.log("\n");
-    cmd
-      .default()
-      .then(() => {
-        console.log("");
-        loader.succeed(`command ${white(command_name)} succeeded :)`);
-      })
-      .catch((err) => {
-        console.log("");
-        loader.fail(`command failed: ${err.message}`);
-      });
-  });
+  const spinner = nano_spinner
+    .createSpinner("processing your command...")
+    .start();
+
+  console.log("\n");
+
+  try {
+    const cmd = await import(file_path);
+    await cmd.default();
+    console.log("");
+    spinner.success({ text: `command ${white(command_name)} succeeded :)` });
+  } catch (error) {
+    console.log("");
+    spinner.error({ text: `command failed: ${error.message}` });
+  }
 }
 
 async function startShell() {
