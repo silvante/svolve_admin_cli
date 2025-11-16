@@ -5,7 +5,7 @@ import { command_line, green, red, white } from "./text_themes/themes.js";
 import readline from "readline";
 import chalk from "chalk";
 import { wellcome } from "./defaults.js";
-import nano_spinner from "nanospinner";
+// import nano_spinner from "nanospinner";
 
 const commands_dir = path.resolve("./commands");
 
