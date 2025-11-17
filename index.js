@@ -6,6 +6,7 @@ import readline from "readline";
 import chalk from "chalk";
 import { wellcome } from "./defaults.js";
 import { Authenticate } from "./auth.js";
+import { DeleteAuthToken } from "./token/auth_token.js";
 // import nano_spinner from "nanospinner";
 
 const commands_dir = path.resolve("./commands");
@@ -45,17 +46,15 @@ async function startShell() {
   // wellcome screen
   await wellcome();
 
+  // ==================================> Auth <=========== //
+  await Authenticate();
+  // ==================================> Auth <=========== //
+
   const readl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
     prompt: chalk.bold(`${command_line("clisa ⟡ svolve")} ❯❯ `),
   });
-
-  // ==================================> Auth <=========== //
-  readl.pause();
-  await Authenticate();
-  readl.resume();
-  // ==================================> Auth <=========== //
 
   readl.prompt();
 
@@ -65,6 +64,7 @@ async function startShell() {
 
     // to exit
     if (input === "exit" || input === "quit") {
+      await DeleteAuthToken()
       console.log("\n arrivederci 👋\n");
       readl.close();
       return;
