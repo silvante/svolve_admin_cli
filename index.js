@@ -51,7 +51,11 @@ async function startShell() {
     prompt: chalk.bold(`${command_line("clisa ⟡ svolve")} ❯❯ `),
   });
 
-  await Authenticate(readl);
+  // ==================================> Auth <=========== //
+  readl.pause();
+  await Authenticate();
+  readl.resume();
+  // ==================================> Auth <=========== //
 
   readl.prompt();
 

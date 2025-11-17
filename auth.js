@@ -1,8 +1,6 @@
 import inquirer from "inquirer";
 
 export async function Authenticate(readl) {
-  readl.pause();
-
   const { password } = await inquirer.prompt([
     {
       type: "password",
@@ -13,6 +11,4 @@ export async function Authenticate(readl) {
   ]);
 
   console.log(`your password is ${password}`);
-
-  readl.resume();
 }
