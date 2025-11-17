@@ -5,6 +5,7 @@ import { command_line, green, red, white } from "./text_themes/themes.js";
 import readline from "readline";
 import chalk from "chalk";
 import { wellcome } from "./defaults.js";
+import { Authenticate } from "./auth.js";
 // import nano_spinner from "nanospinner";
 
 const commands_dir = path.resolve("./commands");
@@ -49,6 +50,8 @@ async function startShell() {
     output: process.stdout,
     prompt: chalk.bold(`${command_line("clisa ⟡ svolve")} ❯❯ `),
   });
+
+  await Authenticate(readl);
 
   readl.prompt();
 
