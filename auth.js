@@ -1,13 +1,13 @@
 import inquirer from "inquirer";
-import { DeleteAuthToken } from "./token/auth_token.js";
-import { red } from "./text_themes/themes.js";
+import { DeleteAuthToken, StoreAuthToken } from "./token/auth_token.js";
+import { green, red } from "./text_themes/themes.js";
 import authService from "./api/services/auth.service.js";
 
 export async function Authenticate() {
   await DeleteAuthToken();
 
   let tries = 0;
-  const access = false;
+  let access = false;
 
   // we can use while loop for this function
 
@@ -21,16 +21,26 @@ export async function Authenticate() {
       },
     ]);
 
+    console.log("");
     const res = await authService.register(password);
-    console.log(res);
+
+    if (res.status >= 400) {
+      console.log(red(res.response.data.message));
+    }
+
+    if (res.permission === true && res.token) {
+      console.log(green("> Wellcome back! Password is correct\n"));
+      await StoreAuthToken(res.token);
+      return (access = true);
+    }
 
     // counting tials
     tries = tries + 1;
     console.log(`tried ${tries} times!`);
 
     if (tries >= 3) {
-      console.log(red("Game over"));
       process.exit(1);
     }
+    console.log("");
   }
 }
