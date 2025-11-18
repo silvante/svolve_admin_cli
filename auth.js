@@ -28,6 +28,7 @@ export async function Authenticate() {
     
     if (tries >= 3) {
       console.log(red("Game over"));
+      process.exit(1);
     }
   }
 }
