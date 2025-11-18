@@ -10,20 +10,22 @@ export async function Authenticate() {
 
   // we can use while loop for this function
 
-  while (!access) {
+  while (!access && tries <= 2) {
     const { password } = await inquirer.prompt([
       {
         type: "password",
         name: "password",
-        message: "admin password:",
+        message: "Admin password:",
         mask: "*",
       },
     ]);
-    
-    console.log(`your password is ${password}`);
+
+    console.log(`\nyour password is ${password} \n`);
 
     // counting tials
     tries = tries + 1;
+    console.log(`tried ${tries} times!`);
+    
     if (tries >= 3) {
       console.log(red("Game over"));
     }
