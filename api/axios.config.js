@@ -1,5 +1,5 @@
 import axios from "axios";
-import { DeleteAuthToken, GetAuthToken } from "../token/auth_token";
+import { DeleteAuthToken, GetAuthToken } from "../token/auth_token.js";
 
 const api = axios.create({
   baseURL: "http://localhost:8080",

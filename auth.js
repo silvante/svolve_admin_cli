@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
 import { DeleteAuthToken } from "./token/auth_token.js";
 import { red } from "./text_themes/themes.js";
+import authService from "./api/services/auth.service.js";
 
 export async function Authenticate() {
   await DeleteAuthToken();
@@ -20,12 +21,13 @@ export async function Authenticate() {
       },
     ]);
 
-    console.log(`\nyour password is ${password} \n`);
+    const res = await authService.register(password);
+    console.log(res);
 
     // counting tials
     tries = tries + 1;
     console.log(`tried ${tries} times!`);
-    
+
     if (tries >= 3) {
       console.log(red("Game over"));
       process.exit(1);
