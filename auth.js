@@ -4,7 +4,7 @@ import { green, red } from "./text_themes/themes.js";
 import authService from "./api/services/auth.service.js";
 
 export async function Authenticate() {
-  await DeleteAuthToken();
+  DeleteAuthToken();
 
   let tries = 0;
   let access = false;
@@ -30,7 +30,7 @@ export async function Authenticate() {
 
     if (res.permission === true && res.token) {
       console.log(green("> Wellcome back! Password is correct\n"));
-      await StoreAuthToken(res.token);
+      StoreAuthToken(res.token);
       return (access = true);
     }
 

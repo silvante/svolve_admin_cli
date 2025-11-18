@@ -64,7 +64,7 @@ async function startShell() {
 
     // to exit
     if (input === "exit" || input === "quit") {
-      await DeleteAuthToken()
+      DeleteAuthToken();
       console.log("\n arrivederci 👋\n");
       readl.close();
       return;
