@@ -22,3 +22,7 @@ export function multicolor(text) {
 export function command_line(text) {
   return gradient.atlas.multiline(text);
 }
+
+export function morning(text) {
+  return gradient.morning.multiline(text);
+}
