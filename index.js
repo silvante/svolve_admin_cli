@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 import path from "path";
-import fs from "fs";
+import fs, { read } from "fs";
 import { command_line, green, red, white } from "./text_themes/themes.js";
 import readline from "readline";
 import chalk from "chalk";
 import { wellcome } from "./defaults.js";
 import { Authenticate } from "./auth.js";
 import { DeleteAuthToken } from "./token/auth_token.js";
-// import nano_spinner from "nanospinner";
-
 const commands_dir = path.resolve("./commands");
 
 async function run_command(command_name) {
@@ -23,20 +21,14 @@ async function run_command(command_name) {
     return;
   }
 
-  // const spinner = nano_spinner
-  //   .createSpinner("processing your command...")
-  //   .start();
-
   console.log("");
 
   try {
     const cmd = await import(file_path);
     await cmd.default();
     console.log("");
-    // spinner.success({ text: `command ${white(command_name)} succeeded :)` });
   } catch (error) {
     console.log("");
-    // spinner.error({ text: `command failed: ${error.message}` });
   }
 }
 
@@ -78,7 +70,12 @@ async function startShell() {
       return;
     }
 
+    // ==================================> Commands running <=========== //
+    readl.pause();
     await run_command(input);
+    readl.resume();
+    // ==================================> Commands running <=========== //
+
     readl.prompt();
   });
 }
